@@ -10,7 +10,9 @@ import com.tvd12.ezyhttp.server.core.annotation.PropertiesSources;
 })
 @ComponentsScan({
     "org.youngmonkeys.ezyplatform",
-    "com.quyettienbn.book_store"
+    "com.quyettienbn.book_store",
+    "org.youngmonkeys.ecommerce",
+    "org.youngmonkeys.ezyarticle"
 })
 public class BookStoreThemeStartupTest {
 
