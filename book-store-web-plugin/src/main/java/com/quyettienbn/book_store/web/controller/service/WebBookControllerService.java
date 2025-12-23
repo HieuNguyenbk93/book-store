@@ -35,6 +35,28 @@ public class WebBookControllerService {
         );
     }
 
+    public List<WebBookResponse> getBestsellingBooks(
+            ProductCurrencyModel currency,
+            int limit
+    ) {
+        return getBooksByCategoryName(
+                CATEGORY_NAME_BESTSELLING_BOOK,
+                currency,
+                limit
+        );
+    }
+
+    public List<WebBookResponse> getNewBooks(
+            ProductCurrencyModel currency,
+            int limit
+    ) {
+        return getBooksByCategoryName(
+                CATEGORY_NAME_NEW_BOOK,
+                currency,
+                limit
+        );
+    }
+
     public List<WebBookResponse> getBooksByCategoryName(
             String categoryName,
             ProductCurrencyModel currency,

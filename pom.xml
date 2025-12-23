@@ -20,7 +20,7 @@
     <ezyarticle.version>0.8.3</ezyarticle.version>
         <jsoup.version>1.18.3</jsoup.version>
         <zxing.version>3.5.3</zxing.version>
-        <ecommerce.version>1.0.1</ecommerce.version>
+        <ecommerce.version>1.0.2</ecommerce.version>
     </properties>
 
     <modules>

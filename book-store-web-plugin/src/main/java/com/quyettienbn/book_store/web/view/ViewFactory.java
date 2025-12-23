@@ -34,6 +34,20 @@ public class ViewFactory {
                 )
             )
             .addVariable(
+                "bestsellingBooks",
+                bookControllerService.getBestsellingBooks(
+                        currency,
+                        6
+                )
+            )
+            .addVariable(
+                "newBooks",
+                bookControllerService.getNewBooks(
+                        currency,
+                        6
+                )
+            )
+            .addVariable(
                 "fragments",
                 pageFragmentManager.getPageFragmentMap(
                     "home",
