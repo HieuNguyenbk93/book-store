@@ -1,0 +1,150 @@
+package com.quyettienbn.book_store.web.controller.view;
+
+import com.tvd12.ezyfox.bean.annotation.EzyAutoBind;
+import com.tvd12.ezyhttp.server.core.annotation.DoGet;
+import com.tvd12.ezyhttp.server.core.annotation.PathVariable;
+import com.tvd12.ezyhttp.server.core.annotation.RequestParam;
+import com.tvd12.ezyhttp.server.core.view.View;
+import lombok.Setter;
+import com.quyettienbn.book_store.constant.BookStoreProductCategoryType;
+import com.quyettienbn.book_store.constant.BookStoreProductType;
+import com.quyettienbn.book_store.web.controller.service.WebBookControllerService;
+import com.quyettienbn.book_store.web.response.WebBookDetailsResponse;
+import com.quyettienbn.book_store.web.response.WebBookResponse;
+import org.youngmonkeys.ecommerce.entity.ProductCategoryStatus;
+import org.youngmonkeys.ecommerce.entity.ProductStatus;
+import org.youngmonkeys.ecommerce.model.ProductCategoryModel;
+import org.youngmonkeys.ecommerce.model.ProductCurrencyModel;
+import org.youngmonkeys.ecommerce.pagination.DefaultProductFilter;
+import org.youngmonkeys.ecommerce.pagination.DefaultProductPriceFilter;
+import org.youngmonkeys.ecommerce.web.controller.service.WebProductCategoryControllerService;
+import org.youngmonkeys.ecommerce.web.service.WebProductCurrencyService;
+import org.youngmonkeys.ecommerce.web.validator.WebProductCategoryValidator;
+import org.youngmonkeys.ezyplatform.model.PaginationModel;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+
+@Setter
+public class StoreController {
+
+    @EzyAutoBind
+    private WebBookControllerService bookControllerService;
+
+    @EzyAutoBind
+    private WebProductCurrencyService currencyService;
+
+    @EzyAutoBind
+    private WebProductCategoryControllerService productCategoryControllerService;
+
+    @EzyAutoBind
+    private WebProductCategoryValidator productCategoryValidator;
+
+
+    @DoGet("/store")
+    public View storeGet(
+            @RequestParam(value = "currencyId") long currencyId,
+            @RequestParam(value = "sortOrder") String sortOrder,
+            @RequestParam(value = "nextPageToken") String nextPageToken,
+            @RequestParam(value = "prevPageToken") String prevPageToken,
+            @RequestParam(value = "lastPage") boolean lastPage,
+            @RequestParam(value = "limit", defaultValue = "12") int limit
+    ) {
+        ProductCurrencyModel currency = currencyService
+            .getCurrencyByIdOrDefault(currencyId);
+        PaginationModel<WebBookResponse> books = bookControllerService
+            .getBookPagination(
+                DefaultProductFilter.builder()
+                    .productType(BookStoreProductType.BOOK.toString())
+                    .status(ProductStatus.PUBLISHED.toString())
+                    .build(),
+                DefaultProductPriceFilter.builder()
+                    .productType(BookStoreProductType.BOOK.toString())
+                    .productStatus(ProductStatus.PUBLISHED.toString())
+                    .build(),
+                sortOrder,
+                nextPageToken,
+                prevPageToken,
+                lastPage,
+                limit,
+                currency
+            );
+        return newStoreViewBuilder(books, currency.getId())
+            .template("store")
+            .addVariable("pageTitle", "store")
+            .build();
+    }
+
+    @DoGet("store/books/categories/{id}")
+    public View storeBooksCategoriesIdGet(
+        HttpServletRequest request,
+        @PathVariable String categoryName,
+        @RequestParam("currencyId") long currencyId,
+        @RequestParam(value = "sortOrder") String sortOrder,
+        @RequestParam(value = "nextPageToken") String nextPageToken,
+        @RequestParam(value = "prevPageToken") String prevPageToken,
+        @RequestParam(value = "lastPage") boolean lastPage,
+        @RequestParam(value = "limit", defaultValue = "12") int limit
+    ) {
+        ProductCategoryModel category = productCategoryValidator
+            .validateCategoryName(categoryName);
+        long categoryId = category.getId();
+        ProductCurrencyModel currency = currencyService
+            .getCurrencyByIdOrDefault(currencyId);
+        PaginationModel<WebBookResponse> books = bookControllerService
+            .getBookPagination(
+                DefaultProductFilter.builder()
+                        .inclusiveCategoryId(categoryId)
+                        .build(),
+                DefaultProductPriceFilter.builder()
+                        .inclusiveCategoryId(categoryId)
+                        .build(),
+                sortOrder,
+                nextPageToken,
+                prevPageToken,
+                lastPage,
+                limit,
+                currency
+            );
+        return newStoreViewBuilder(books, currencyId)
+            .template("book-category")
+            .addVariable("pageTitle", category.getDisplayName())
+            .addVariable("category", category)
+            .build();
+    }
+
+    @DoGet("/store/books/{bookId}")
+    public View storeBooksBookIdGet(
+        @PathVariable long bookId,
+        @RequestParam("currencyId") long currencyId
+    ) {
+        ProductCurrencyModel currency = currencyService
+            .getCurrencyByIdOrDefault(currencyId);
+        WebBookDetailsResponse book = bookControllerService
+            .getBookDetailsById(bookId, currency);
+        return View.builder()
+            .template("book-details")
+            .addVariable("pageTitle", book.getName())
+            .addVariable("book", book)
+            .addVariable("currencyId", currency.getId())
+            .build();
+    }
+
+    private View.Builder newStoreViewBuilder(
+        PaginationModel<WebBookResponse> books,
+        long currencyId
+    ) {
+        return View.builder()
+            .addVariable("currencyId", currencyId)
+            .addVariable("books", books)
+            .addVariable("categories",
+                productCategoryControllerService
+                    .getProductCategoryMenusByTypeAndStatuses(
+                        BookStoreProductCategoryType.BOOK.toString(),
+                        Collections.singletonList(
+                            ProductCategoryStatus.SHOW.toString()
+                        )
+                    )
+            );
+    }
+}

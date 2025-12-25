@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ezytheme}">
+<body>
+<div layout:fragment="content" class="container-fluid store">
+    <h1 class="page-title text-center py-5">
+        [[#{store}]]
+    </h1>
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <div class="sidebar">
+                <h3>[[#{categories}]]</h3>
+                <div class="list-group  hidden-sm hidden-xs" id="list-group-l">
+                    <ul>
+                        <li th:each="menu : ${categories}">
+                            <a th:href="${'/store/books/categories/' + menu.category.name}">
+                                <span>[[${menu.category.displayName}]]</span>
+                            </a>
+                            <ul th:if="${menu.children.size() > 0}">
+                                <li th:each="menuItemLv1 : ${menu.children}">
+                                    <a th:href="${'/store/books/categories/' + menuItemLv1.category.name}">
+                                        <span th:text="${menuItemLv1.category.displayName}"></span>
+                                    </a>
+                                    <ul th:if="${menuItemLv1.children.size() > 0}">
+                                        <li th:each="menuItemLv2 : ${menuItemLv1.children}">
+                                            <a th:href="${'/store/books/categories/' + menuItemLv2.category.name}">
+                                                [[${menuItemLv2.category.displayName}]]
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="input-group input-group-lg mb-4">
+                <input type="search" class="form-control rounded-start"
+                       th:placeholder="#{keyword}" id="bookSearchKeyword"
+                       th:aria-label="keyword" aria-describedby="store-search-input"
+                       th:value="${bookSearchKeyword}"
+                       onkeydown="onKeydownToSearchBookItems(this);">
+                <span class="input-group-text rounded-end text-primary" id="store-search-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            </div>
+            <div id="bookListWrapper">
+                <div class="books" id="bookListBody">
+                    <th:block th:each="book : ${books.items}">
+                        <th:block th:replace="~{fragments/book-item :: content(book=${book})}" />
+                    </th:block>
+                </div>
+                <div th:if="${books.continuation.hasNext}"
+                     class="d-flex justify-content-center pt-5" id="nextButtonContainer">
+                    <button type="button" class="btn btn-outline-primary px-5 py-3" onclick="fetchBookList('next')">
+                        [[#{load_mores}]]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="post-scripts">
+    <th:block th:replace="~{fragments/book-list :: scripts}" />
+</th:block>
+</body>
+</html>
