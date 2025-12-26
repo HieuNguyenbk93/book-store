@@ -83,11 +83,11 @@
 
 <th:block th:replace="~{ezycommon/loading :: content}" />
 
-<th:block th:if="${loggedIn != true}">
-    <div th:replace="~{ezylogin/login :: content}"></div>
-    <div th:replace="~{ezylogin/register :: content}"></div>
-    <div th:replace="~{ezylogin/forgot-password :: content}"></div>
-</th:block>
+<!--<th:block th:if="${loggedIn != true}">-->
+<!--    <div th:replace="~{ezylogin/login :: content}"></div>-->
+<!--    <div th:replace="~{ezylogin/register :: content}"></div>-->
+<!--    <div th:replace="~{ezylogin/forgot-password :: content}"></div>-->
+<!--</th:block>-->
 
 <th:block th:replace="~{ezycommon/alert :: content}" />
 <th:block th:replace="~{ezycommon/toast :: content}" />
@@ -148,11 +148,11 @@
         registerProductToShoppingCart(bookId);
     }
 </script>
-<th:block th:if="${loggedIn != true}">
-    <th:block th:replace="~{ezylogin/login :: scripts}" />
-    <th:block th:replace="~{ezylogin/register :: scripts}" />
-    <th:block th:replace="~{ezylogin/forgot-password :: scripts}" />
-</th:block>
+<!--<th:block th:if="${loggedIn != true}">-->
+<!--    <th:block th:replace="~{ezylogin/login :: scripts}" />-->
+<!--    <th:block th:replace="~{ezylogin/register :: scripts}" />-->
+<!--    <th:block th:replace="~{ezylogin/forgot-password :: scripts}" />-->
+<!--</th:block>-->
 <th:block th:replace="~{ezycommon/alert :: scripts}" />
 <th:block th:replace="~{ezycommon/toast :: scripts}" />
 <th:block th:replace="~{fragments/header :: scripts}" />

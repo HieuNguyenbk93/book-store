@@ -80,6 +80,53 @@
             <scope>system</scope>
             <systemPath>${ezyplatform.home}/web/plugins/ecommerce/lib/ecommerce-web-plugin-${ecommerce.version}.jar</systemPath>
         </dependency>
+    <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>${google.client.version}</version>
+        <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-oauth2</artifactId>
+            <version>${google.apis.version}</version>
+        <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.restfb</groupId>
+            <artifactId>restfb</artifactId>
+            <version>${facebook.client.version}</version>
+        <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezylogin-sdk</artifactId>
+            <version>${ezylogin.version}</version>
+        <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezylogin/lib/ezylogin-sdk-${ezylogin.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezymail-sdk</artifactId>
+            <version>${ezymail.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezymail/lib/ezymail-sdk-${ezymail.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezymail-web-plugin</artifactId>
+            <version>${ezymail.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezymail/lib/ezymail-web-plugin-${ezymail.version}.jar
+            </systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezylogin-web-plugin</artifactId>
+            <version>${ezylogin.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezylogin/lib/ezylogin-web-plugin-${ezylogin.version}.jar</systemPath>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -106,6 +153,9 @@
                     </resource>
                 <resource>
                         <directory>${ezyplatform.home}/web\plugins/ezyarticle/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/web\plugins/ezylogin/resources</directory>
                     </resource>
                 </resources>
             </build>

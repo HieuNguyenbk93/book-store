@@ -66,6 +66,35 @@
             <scope>system</scope>
             <systemPath>${ezyplatform.home}/admin/plugins/ecommerce/lib/ecommerce-admin-plugin-${ecommerce.version}.jar</systemPath>
         </dependency>
+    <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezylogin-sdk</artifactId>
+            <version>${ezylogin.version}</version>
+        <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/ezylogin/lib/ezylogin-sdk-${ezylogin.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezymail-admin-plugin</artifactId>
+            <version>${ezymail.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/ezymail/lib/ezymail-admin-plugin-${ezymail.version}.jar
+            </systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezymail-sdk</artifactId>
+            <version>${ezymail.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/ezymail/lib/ezymail-sdk-${ezymail.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezylogin-admin-plugin</artifactId>
+            <version>${ezylogin.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/ezylogin/lib/ezylogin-admin-plugin-${ezylogin.version}.jar</systemPath>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -92,6 +121,9 @@
                     </resource>
                 <resource>
                         <directory>${ezyplatform.home}/admin\plugins/ezyarticle/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/admin\plugins/ezylogin/resources</directory>
                     </resource>
                 </resources>
             </build>
