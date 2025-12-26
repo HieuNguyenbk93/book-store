@@ -13,7 +13,9 @@ import com.tvd12.ezyhttp.server.core.annotation.PropertiesSources;
     "com.quyettienbn.book_store",
     "org.youngmonkeys.ecommerce",
     "org.youngmonkeys.ezyarticle",
-    "org.youngmonkeys.ezylogin"
+    "org.youngmonkeys.ezylogin",
+    "org.youngmonkeys.ezyaccount",
+    "org.youngmonkeys.ezycrm"
 })
 public class BookStoreAdminPluginStartupTest {
 

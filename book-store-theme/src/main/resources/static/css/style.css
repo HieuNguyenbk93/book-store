@@ -790,6 +790,10 @@ strong {
     border-top: 1px solid #ddd;
 }
 
+.modal-backdrop {
+    z-index: 0;
+}
+
 .modal-book-information {
     display: flex;
     flex-wrap: wrap;

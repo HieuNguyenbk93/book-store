@@ -127,6 +127,34 @@
             <scope>system</scope>
             <systemPath>${ezyplatform.home}/web/plugins/ezylogin/lib/ezylogin-web-plugin-${ezylogin.version}.jar</systemPath>
         </dependency>
+    <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezyaccount-sdk</artifactId>
+            <version>${ezyaccount.version}</version>
+        <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezyaccount/lib/ezyaccount-sdk-${ezyaccount.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezycrm-sdk</artifactId>
+            <version>${ezycrm.version}</version>
+        <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezycrm/lib/ezycrm-sdk-${ezycrm.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezycrm-web-plugin</artifactId>
+            <version>${ezycrm.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezycrm/lib/ezycrm-web-plugin-${ezycrm.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>ezyaccount-web-plugin</artifactId>
+            <version>${ezyaccount.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/web/plugins/ezyaccount/lib/ezyaccount-web-plugin-${ezyaccount.version}.jar</systemPath>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -156,6 +184,12 @@
                     </resource>
                 <resource>
                         <directory>${ezyplatform.home}/web\plugins/ezylogin/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/web\plugins/ezyaccount/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/web\plugins/ezycrm/resources</directory>
                     </resource>
                 </resources>
             </build>

@@ -75,11 +75,11 @@ public class StoreController {
             .build();
     }
 
-    @DoGet("store/books/categories/{id}")
+    @DoGet("/store/books/categories/{name}")
     public View storeBooksCategoriesIdGet(
         HttpServletRequest request,
         @PathVariable String categoryName,
-        @RequestParam("currencyId") long currencyId,
+        @RequestParam(value = "currencyId") long currencyId,
         @RequestParam(value = "sortOrder") String sortOrder,
         @RequestParam(value = "nextPageToken") String nextPageToken,
         @RequestParam(value = "prevPageToken") String prevPageToken,
@@ -94,11 +94,11 @@ public class StoreController {
         PaginationModel<WebBookResponse> books = bookControllerService
             .getBookPagination(
                 DefaultProductFilter.builder()
-                        .inclusiveCategoryId(categoryId)
-                        .build(),
+                    .inclusiveCategoryId(categoryId)
+                    .build(),
                 DefaultProductPriceFilter.builder()
-                        .inclusiveCategoryId(categoryId)
-                        .build(),
+                    .inclusiveCategoryId(categoryId)
+                    .build(),
                 sortOrder,
                 nextPageToken,
                 prevPageToken,
