@@ -17,10 +17,10 @@
     <properties>
         <!--suppress UnresolvedMavenProperty -->
         <ezyplatform.home>${env.EZYPLATFORM_HOME}</ezyplatform.home>
-        <ezyarticle.version>0.8.4</ezyarticle.version>
+        <ezyarticle.version>0.8.5</ezyarticle.version>
         <jsoup.version>1.18.3</jsoup.version>
         <zxing.version>3.5.3</zxing.version>
-        <ecommerce.version>1.0.4</ecommerce.version>
+        <ecommerce.version>1.0.5</ecommerce.version>
         <ezymail.version>0.1.4</ezymail.version>
         <facebook.client.version>2022.3.1</facebook.client.version>
         <google.apis.version>v2-rev157-1.25.0</google.apis.version>
@@ -29,7 +29,7 @@
         <ezylogin.version>0.2.0</ezylogin.version>
         <ezycrm.version>0.3.7</ezycrm.version>
         <ezyaccount.version>0.1.8</ezyaccount.version>
-    <graphql.version>0.0.6</graphql.version>
+        <graphql.version>0.0.6</graphql.version>
     </properties>
 
     <modules>
