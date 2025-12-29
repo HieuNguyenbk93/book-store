@@ -16,10 +16,10 @@
 
 <!DOCTYPE html>
 <html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout">
 
 <head th:remove="tag">
     <th:block th:if="${commonFragments.get('styles') == null || commonFragments.get('styles').content == 'styles'}">
@@ -33,6 +33,8 @@
         <link rel="stylesheet" type="text/css" ezy:vhref="/css/store.css" />
         <link rel="stylesheet" type="text/css" ezy:vhref="/css/book-details.css" />
         <link rel="stylesheet" type="text/css" ezy:vhref="/css/post.css" />
+        <link rel="stylesheet" type="text/css" ezy:vhref="/css/author.css" />
+        <link rel="stylesheet" type="text/css" ezy:vhref="/ezylogin/css/style.css" />
     </th:block>
     <th:block th:if="${commonFragments.get('styles') != null && commonFragments.get('styles').content != 'styles'}">
         <ezy:block ezy:utext="${commonFragments.get('styles').content}" />
@@ -115,6 +117,7 @@
     var showLogin = /*[[${showLogin}]]*/ '';
     var loggedIn = /*[[${loggedIn}]]*/ '';
     var userStatus = /*[[${user != null ? user.status : ''}]]*/ '';
+    var allowAnonymousUser = /*[[${allowAnonymousUser}]]*/ '';
     /*]]>*/
 </script>
 <th:block layout:fragment="pre-main-scripts" />
@@ -142,10 +145,35 @@
     }
 
     var addBookToCart = function(bookId) {
-        registerProductToShoppingCartRequest = {
-            onSuccessCallback: fetchShoppingCartProductCount
+        var doAddBookTokCart = (callback) => {
+            registerProductToShoppingCartRequest = {
+                onSuccessCallback: callback
+            };
+            registerProductToShoppingCart(bookId);
         };
-        registerProductToShoppingCart(bookId);
+        if (loggedIn) {
+            doAddBookTokCart(fetchShoppingCartProductCount);
+        } else {
+            anonymousUserLogin(() => {
+                doAddBookTokCart(() => location.reload());
+            });
+        }
+    }
+
+    var buyBookNow = function(bookId) {
+        var doAddBookTokCart = () => {
+            registerProductToShoppingCartRequest = {
+                onSuccessCallback: () => {
+                    location = '/checkout/shopping-cart';
+                }
+            };
+            registerProductToShoppingCart(bookId);
+        };
+        if (loggedIn) {
+            doAddBookTokCart();
+        } else {
+            anonymousUserLogin(doAddBookTokCart);
+        }
     }
 </script>
 <th:block th:if="${loggedIn != true}">
@@ -159,9 +187,11 @@
 <th:block th:if="${loggedIn == true}">
     <th:block th:replace="~{ezyaccount/notification :: scripts}" />
     <th:block th:replace="~{ecommerce/checkout/scripts :: common}" />
-    <th:block th:replace="~{ecommerce/checkout/scripts :: register-product}" />
-    <th:block th:replace="~{ecommerce/shopping-cart/scripts :: product-count}" />
 </th:block>
+
+<th:block th:replace="~{ecommerce/checkout/scripts :: register-product}" />
+<th:block th:replace="~{ecommerce/shopping-cart/scripts :: product-count}" />
+
 <th:block th:if="${commonFragments.get('header') != null && !#strings.isEmpty(commonFragments.get('header').additionalFoot)}">
     <ezy:block ezy:utext="${commonFragments.get('header').additionalFoot}" />
 </th:block>

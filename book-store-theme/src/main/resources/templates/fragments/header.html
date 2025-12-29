@@ -53,11 +53,10 @@
             </ul>
         </div>
         <ul class="d-none d-lg-flex align-items-center gap-3">
-            <li th:if="${loggedIn == true && shoppingCartProductCount > 0}"
-                class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link" href="/checkout/shopping-cart">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="translate-middle badge rounded-pill bg-warning navbar-badge">
+                    <span class="translate-middle badge rounded-pill bg-warning navbar-badge shopping-cart-product-count">
                         [[${shoppingCartProductCount}]]
                     </span>
                 </a>
@@ -130,11 +129,10 @@
             </li>
         </ul>
         <div class="d-lg-none d-flex">
-            <div th:if="${loggedIn == true && shoppingCartProductCount > 0}"
-                 class="nav-item dropdown me-4">
+            <div class="nav-item dropdown me-4">
                 <a class="nav-link" href="/checkout/shopping-cart">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="badge badge-warning navbar-badge">
+                    <span class="badge badge-warning navbar-badge shopping-cart-product-count">
                             [[${shoppingCartProductCount}]]
                         </span>
                 </a>

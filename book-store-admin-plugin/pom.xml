@@ -123,6 +123,20 @@
             <scope>system</scope>
             <systemPath>${ezyplatform.home}/admin/plugins/ezycrm/lib/ezycrm-admin-plugin-${ezycrm.version}.jar</systemPath>
         </dependency>
+    <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>graphql-sdk</artifactId>
+            <version>${graphql.version}</version>
+        <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/graphql/lib/graphql-sdk-${graphql.version}.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.youngmonkeys</groupId>
+            <artifactId>graphql-admin-plugin</artifactId>
+            <version>${graphql.version}</version>
+            <scope>system</scope>
+            <systemPath>${ezyplatform.home}/admin/plugins/graphql/lib/graphql-admin-plugin-${graphql.version}.jar</systemPath>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -158,6 +172,12 @@
                     </resource>
                 <resource>
                         <directory>${ezyplatform.home}/admin\plugins/ezycrm/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/admin\plugins/ezymail/resources</directory>
+                    </resource>
+                <resource>
+                        <directory>${ezyplatform.home}/admin\plugins/graphql/resources</directory>
                     </resource>
                 </resources>
             </build>

@@ -29,6 +29,7 @@
         <ezylogin.version>0.2.0</ezylogin.version>
         <ezycrm.version>0.3.7</ezycrm.version>
         <ezyaccount.version>0.1.8</ezyaccount.version>
+    <graphql.version>0.0.6</graphql.version>
     </properties>
 
     <modules>
@@ -105,6 +106,12 @@
             <scope>system</scope>
             <systemPath>${ezyplatform.home}/web/plugins/ecommerce/lib/ecommerce-sdk-${ecommerce.version}.jar
             </systemPath>
+        </dependency>
+    <dependency>
+            <groupId>com.tvd12</groupId>
+            <artifactId>ezyhttp-server-graphql</artifactId>
+            <version>${ezy.http.version}</version>
+        <scope>provided</scope>
         </dependency>
     </dependencies>
 
